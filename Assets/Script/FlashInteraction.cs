@@ -20,8 +20,9 @@ public class FlashInteraction : MonoBehaviour
 
     public void PickupFlash()
     {
-        transform.SetParent(targetParent);
-        transform.localPosition = Vector3.zero;
+        transform.parent.SetParent(targetParent);
+        transform.parent.localPosition = Vector3.zero;
+        transform.parent.localRotation = Quaternion.identity;
         Destroy(GetComponent<BoxCollider>());
     }
 }
