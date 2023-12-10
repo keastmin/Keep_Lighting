@@ -4,36 +4,43 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public GameObject _obj; // 생성할 오브젝트
     public float maxDistance = 3f; // Raycast 최대 거리
     public Transform controllerTransform; // 컨트롤러 Transform
 
     private LineRenderer lineRenderer; // 라인 렌더러 참조
     private GameObject lastIneractionObject; // 마지막으로 상호작용한 오브젝트
+    private bool flashCheck = false; // 손전등을 주운 여부
+
+    private Vector3 rayStart; // Ray의 시작
+    private Vector3 rayEnd; // Ray의 끝
 
     // Start is called before the first frame update
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        if(_obj == null)
-        {
-            _obj = GetComponent<GameObject>();
-            Debug.LogError("게임 오브젝트가 없습니다.");
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 rayStart = controllerTransform.position + controllerTransform.forward * 0.2f; // 약간의 오프셋 추가
+        // 손전등 여부에 따른 ray 방향 조정
+        if (!flashCheck)
+        {
+            rayStart = controllerTransform.position + controllerTransform.forward * 0.1f; // 약간의 오프셋 추가
+            rayEnd = rayStart + controllerTransform.forward * maxDistance;
+        }
+        //else
+        //{
+        //    rayStart = controllerTransform.position + controllerTransform.up * 0.1f;
+        //    rayEnd = rayStart + controllerTransform.up * maxDistance;
+        //}
+
         RaycastHit hit;
-        Vector3 rayEnd = rayStart + controllerTransform.forward * maxDistance;
-        
         if(Physics.Raycast(rayStart, controllerTransform.forward, out hit, maxDistance))
         {
             rayEnd = hit.point; // Ray가 오브젝트에 닿았을 경우
 
-            if (hit.collider.CompareTag("Item"))
+            if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("Flash"))
             {
                 GameObject hitObject = hit.collider.gameObject;
                 hitObject.GetComponent<ItemInteraction>().TurnOnInteraction();
@@ -47,7 +54,16 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (OVRInput.GetDown(OVRInput.Button.One))
                 {
-                    DestroyInteractWithObject(hitObject);
+                    if (hitObject.CompareTag("Item"))
+                    {
+                        Destroy(hitObject);
+                    }
+                    else if(hitObject.CompareTag("Flash"))
+                    {
+                        hitObject.GetComponent<FlashInteraction>().PickupFlash();
+                        controllerTransform = hitObject.GetComponentInParent<Transform>();
+                        //flashCheck = true;
+                    }
                 }
             }
             else
@@ -69,27 +85,5 @@ public class PlayerInteraction : MonoBehaviour
         }
         lineRenderer.SetPosition(0, rayStart);
         lineRenderer.SetPosition(1, rayEnd);
-
-
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            CreateObjectInDirection();
-        }
-    }
-
-    void DestroyInteractWithObject(GameObject hitObject)
-    {
-        Destroy(hitObject);
-    }
-
-    void CreateObjectInDirection()
-    {
-        Vector3 rayStart = controllerTransform.position + controllerTransform.forward * 0.2f; // 약간의 오프셋 추가
-        RaycastHit hit;
-        if (Physics.Raycast(rayStart, controllerTransform.forward, out hit, maxDistance))
-        {
-            Vector3 createPosition = hit.point + hit.normal * 0.1f;
-            Instantiate(_obj, createPosition, Quaternion.identity);
-        }
     }
 }
