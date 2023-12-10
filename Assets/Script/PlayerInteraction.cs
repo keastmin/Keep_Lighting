@@ -61,7 +61,7 @@ public class PlayerInteraction : MonoBehaviour
                     else if(hitObject.CompareTag("Flash"))
                     {
                         hitObject.GetComponent<FlashInteraction>().PickupFlash();
-                        controllerTransform = hitObject.transform.parent.parent;
+                        controllerTransform = hitObject.transform.parent;
                         //flashCheck = true;
                     }
                 }
