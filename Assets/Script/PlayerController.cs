@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 3;
     public float jumpPower = 15;
     public float gravity = -50;
-    public float rotSpeed = 50;
+    public float rotSpeed = 100;
     float yVelocity = 0;
     float camAngle;
     float bodyAngle;
