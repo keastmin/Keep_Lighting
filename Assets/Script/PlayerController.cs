@@ -5,11 +5,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 3;
     public float jumpPower = 15;
     public float gravity = -50;
-    public float rotSpeed = 150;
+    public float rotSpeed = 50;
     float yVelocity = 0;
     float camAngle;
     float bodyAngle;
-
+    //test1
     CharacterController cc;
 
     public Transform camera;
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     {
         float value = Input.GetAxis("Mouse Y");
         camAngle += value * rotSpeed * Time.deltaTime;
-        camAngle = Mathf.Clamp(camAngle, -20, 15);
+        camAngle = Mathf.Clamp(camAngle, -40, 25);
 
         camera.localEulerAngles = new Vector3(-camAngle, 0, 0);
     }
