@@ -30,5 +30,13 @@ public class InvScript : MonoBehaviour
         {
             InventoryC.gameObject.SetActive(false);
         }
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            InventoryC.gameObject.SetActive(true);
+        }
+        if (OVRInput.GetUp(OVRInput.Button.Two))
+        {
+            InventoryC.gameObject.SetActive(false);
+        }
     }
 }
