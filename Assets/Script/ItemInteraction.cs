@@ -24,7 +24,7 @@ public class ItemInteraction : MonoBehaviour
 
     public void TurnOffInteraction()
     {
-        //material.DisableKeyword("_EMISSION");
+        material.DisableKeyword("_EMISSION");
         material.SetColor("_EmissionColor", originalEmissionColor); // 원래 Emission 색상으로 복원
     }
 
