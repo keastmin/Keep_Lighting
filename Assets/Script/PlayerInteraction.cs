@@ -8,8 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public Transform controllerTransform; // 컨트롤러 Transform
 
     private LineRenderer lineRenderer; // 라인 렌더러 참조
-    private GameObject lastIneractionObject; // 마지막으로 상호작용한 오브젝트
-    private bool flashCheck = false; // 손전등을 주운 여부
+    private GameObject lastInteractionObject; // 마지막으로 상호작용한 오브젝트
 
     private Vector3 rayStart; // Ray의 시작
     private Vector3 rayEnd; // Ray의 끝
@@ -24,16 +23,8 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         // 손전등 여부에 따른 ray 방향 조정
-        if (!flashCheck)
-        {
-            rayStart = controllerTransform.position + controllerTransform.forward * 0.1f; // 약간의 오프셋 추가
-            rayEnd = rayStart + controllerTransform.forward * maxDistance;
-        }
-        //else
-        //{
-        //    rayStart = controllerTransform.position + controllerTransform.up * 0.1f;
-        //    rayEnd = rayStart + controllerTransform.up * maxDistance;
-        //}
+        rayStart = controllerTransform.position + controllerTransform.forward * 0.1f; // 약간의 오프셋 추가
+        rayEnd = rayStart + controllerTransform.forward * maxDistance;
 
         RaycastHit hit;
         if(Physics.Raycast(rayStart, controllerTransform.forward, out hit, maxDistance))
@@ -45,12 +36,12 @@ public class PlayerInteraction : MonoBehaviour
                 GameObject hitObject = hit.collider.gameObject;
                 hitObject.GetComponent<ItemInteraction>().TurnOnInteraction();
 
-                if(lastIneractionObject != null && lastIneractionObject != hitObject)
+                if(lastInteractionObject != null && lastInteractionObject != hitObject)
                 {
-                    lastIneractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
+                    lastInteractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
                 }
 
-                lastIneractionObject = hitObject;
+                lastInteractionObject = hitObject;
 
                 if (OVRInput.GetDown(OVRInput.Button.One))
                 {
@@ -62,25 +53,24 @@ public class PlayerInteraction : MonoBehaviour
                     {
                         hitObject.GetComponent<FlashInteraction>().PickupFlash();
                         controllerTransform = hitObject.transform.parent;
-                        //flashCheck = true;
                     }
                 }
             }
             else
             {
-                if (lastIneractionObject != null)
+                if (lastInteractionObject != null)
                 {
-                    lastIneractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
-                    lastIneractionObject = null;
+                    lastInteractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
+                    lastInteractionObject = null;
                 }
             }
         }
         else
         {
-            if(lastIneractionObject != null)
+            if(lastInteractionObject != null)
             {
-                lastIneractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
-                lastIneractionObject = null;
+                lastInteractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
+                lastInteractionObject = null;
             }
         }
         lineRenderer.SetPosition(0, rayStart);

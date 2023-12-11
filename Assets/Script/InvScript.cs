@@ -42,6 +42,7 @@ public class InvScript : MonoBehaviour
         {
             InventoryC.gameObject.SetActive(false);
         }
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if(KeyS == false)

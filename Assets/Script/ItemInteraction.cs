@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemInteraction : MonoBehaviour
 {
-    private Material material;
+    public Material material;
     private Color originalEmissionColor;
 
     void Start()
