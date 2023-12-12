@@ -27,7 +27,10 @@ public class ItemInteraction : MonoBehaviour
         material.DisableKeyword("_EMISSION");
         material.SetColor("_EmissionColor", originalEmissionColor); // 원래 Emission 색상으로 복원
     }
-
+    public void TakeItem()
+    {
+        Destroy(gameObject);
+    }
     // Update is called once per frame
     void Update()
     {

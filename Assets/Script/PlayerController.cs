@@ -13,9 +13,20 @@ public class PlayerController : MonoBehaviour
     CharacterController cc;
 
     public Transform camera;
+
+    private GameObject lastInteractionObject;
+    private LineRenderer lineRenderer;
+
+    private Vector3 rayStart;
+    private Vector3 rayEnd;
+
+    public float maxDistance = 3.0f;
+
+
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        Cursor.visible = false;
     }
 
     void Update()
@@ -32,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         float value = Input.GetAxis("Mouse Y");
         camAngle += value * rotSpeed * Time.deltaTime;
-        camAngle = Mathf.Clamp(camAngle, -40, 25);
+        camAngle = Mathf.Clamp(camAngle, -70, 70);
 
         camera.localEulerAngles = new Vector3(-camAngle, 0, 0);
     }
@@ -66,4 +77,37 @@ public class PlayerController : MonoBehaviour
         //이동하고 싶다.
         cc.Move(dir * Time.deltaTime);
     }
+
+    //private void RayUpdate()
+    //{
+    //    rayStart = controllerTransform.position + controllerTransform.forward * 0.1f;
+    //    rayEnd = rayStart + controllerTransform.forward * maxDistance;
+
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(rayStart, controllerTransform.forward, out hit, maxDistance))
+    //    {
+    //        rayEnd = hit.point;
+
+    //        if (hit.collider.CompareTag("Item") || hit.collider.CompareTag("Flash"))
+    //        {
+    //            GameObject hitObject = hit.collider.gameObject;
+    //            hitObject.GetComponent<ItemInteraction>().TurnOnInteraction();
+
+    //            if (lastInteractionObject != null && lastInteractionObject != hitObject)
+    //            {
+    //                lastInteractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
+    //            }
+
+    //            lastInteractionObject = hitObject;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (lastInteractionObject != null)
+    //        {
+    //            lastInteractionObject.GetComponent<ItemInteraction>().TurnOffInteraction();
+    //            lastInteractionObject = null;
+    //        }
+    //    }
+    //}
 }
