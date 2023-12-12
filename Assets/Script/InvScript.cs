@@ -34,16 +34,16 @@ public class InvScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             InventoryC.gameObject.SetActive(true);
         }
-        if (Input.GetKeyUp(KeyCode.Tab))
+        if (OVRInput.GetUp(OVRInput.Button.Two))
         {
             InventoryC.gameObject.SetActive(false);
         }
         
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (OVRInput.GetUp(OVRInput.Button.Three))
         {
             if(KeyS == false)
             {
@@ -56,7 +56,7 @@ public class InvScript : MonoBehaviour
                 KeyS = false;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (OVRInput.GetUp(OVRInput.Button.Four))
         {
             if (Key2S == false)
             {
