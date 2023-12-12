@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     if (hitObject.CompareTag("Item"))
                     {
+                        hitObject.GetComponent<ObjectImageTrue>().GetImage();
                         Destroy(hitObject);
                     }
                     else if(hitObject.CompareTag("Flash"))

@@ -28,6 +28,11 @@ public class ItemInteraction : MonoBehaviour
         material.DisableKeyword("_EMISSION");
     }
 
+    public void get_item()
+    {
+        Destroy(gameObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
