@@ -62,45 +62,5 @@ public class InvScript : MonoBehaviour
         {
             InventoryC.gameObject.SetActive(false);
         }
-        
-        //if (OVRInput.GetUp(OVRInput.Button.Three))
-        //{
-        //    if(KeyS == false)
-        //    {
-        //        KeyC.gameObject.SetActive(true);
-        //        KeyS = true;
-        //    }
-        //    else
-        //    {
-        //        KeyC.gameObject.SetActive(false);
-        //        KeyS = false;
-        //    }
-        //}
-        //if (OVRInput.GetUp(OVRInput.Button.Four))
-        //{
-        //    if (Key2S == false)
-        //    {
-        //        Key2C.gameObject.SetActive(true);
-        //        Key2S = true;
-        //    }
-        //    else
-        //    {
-        //        Key2C.gameObject.SetActive(false);
-        //        Key2S = false;
-        //    }
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    if (HammerS == false)
-        //    {
-        //        HammerC.gameObject.SetActive(true);
-        //        HammerS = true;
-        //    }
-        //    else
-        //    {
-        //        HammerC.gameObject.SetActive(false);
-        //        HammerS = false;
-        //    }
-        //}
     }
 }
