@@ -30,9 +30,5 @@ public class ObjectImageTrue : MonoBehaviour
             Debug.Log("GetImage ½ÇÇà" + ": " + objImage.name);
             GetComponent<InvScript>().ImageTrue(objImage);
         }
-        else
-        {
-            Debug.Log("ÀÌ¾¾¹ß " + objImage + "!!!");
-        }
     }
 }
