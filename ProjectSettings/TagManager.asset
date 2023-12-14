@@ -8,6 +8,11 @@ TagManager:
   - RoomLight
   - SamplesInfoPanel
   - Flash
+  - firstDoor
+  - secondDoor
+  - Battery
+  - Paint
+  - ScaryPaint
   layers:
   - Default
   - TransparentFX

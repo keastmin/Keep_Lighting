@@ -25,6 +25,7 @@ public class Event1 : MonoBehaviour
             Eventtext.text = "아래 카펫을 옆으로 치워 획득하십시오";
             EventOn = true;
             EventCollider.gameObject.SetActive(false);
+            Invoke("NextText3", 2f);
         }
     }
 
@@ -35,6 +36,10 @@ public class Event1 : MonoBehaviour
     void NextText2()
     {
         Eventtext.text = "현관문 앞으로 가십시오.";
+    }
+    void NextText3()
+    {
+        Eventtext.text = "";
     }
     // Update is called once per frame
     void Update()
